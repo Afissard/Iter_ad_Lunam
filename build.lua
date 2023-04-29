@@ -22,11 +22,11 @@ print("\nStarting compilation...")
 local compilation_t0 = os.time()
 os.execute("gcc ".. all_lib .. target_file .."-o bin/".. output_name)
 local compilation_time = os.time() - compilation_t0
-print("Compilation success in "..compilation_time.. " seconds.")
+print("Compilation done in "..compilation_time.. " seconds.")
 
 -- Execution
 print("Starting execution... \n")
 local execution_t0 = os.time()
 os.execute("./bin/".. output_name)
 local execution_time = os.time() - execution_t0
-print("\nExecution in "..execution_time.." seconds")
+print("\nExecution done in "..execution_time.." seconds")

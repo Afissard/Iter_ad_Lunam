@@ -47,37 +47,30 @@
 // Custom color print for easy use of Ansi escape code
 #define COLOR_STR(string, color, background)   color background string "\x1b[0m"
 
-int width = 8;
-int height = 8;
-int str_screen_len;
-int *p_str_screen_len = &str_screen_len;
+static int width = 4;
+static int height = 4;
+#define screen_size 16
+
+char screen[screen_size] = {
+    '1','2','3','4',
+    '2','x','x','x',
+    '3','x','x','x',
+    '4','x','x','x'
+}; // test screen
+//char *p_screen = &screen;
 
 int main(){
-    str_screen_len = width*height;
-    char screen[str_screen_len]; 
-    /*
-    screen = {
-        "1","2","3","4","5","6","7","8",
-        "2","*","*","*","*","*","*","*",
-        "3","*","*","*","*","*","*","*",
-        "4","*","*","*","*","*","*","*",
-        "5","*","*","*","*","*","*","*",
-        "6","*","*","*","*","*","*","*",
-        "7","*","*","*","*","*","*","*",
-        "8","*","*","*","*","*","*","*"
-    }; // test screen 
-    */
-    
     // Display screen
-    for (int y = 0; y < height; y++){
-        for (int x = 0; x < width; x++){
-            if (screen[x+y] == NULL){printf(".");} // Prevent empty variable
-            else {printf("%s", screen[x+y]);}
-            
+    int screen_pos = 0; // position of the current selected chararactere of the screen
+    for(int y = 0; y < height; y++){
+        for(int x = 0; x < height; x++){
+            printf("%c", screen[screen_pos]);
+            screen_pos ++;
         }
         printf("\n");
     }
 
+    // END
     printf(COLOR_STR("Eamus ad Lunam!", B_BLUE, BG_B_WHITE) "\n");
     return 0;
 }
