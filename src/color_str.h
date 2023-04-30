@@ -43,4 +43,5 @@
 #define B_CYAN          "\x1b[96m"
 #define B_WHITE         "\x1b[97m"
 // Custom color print for easy use of Ansi escape code
-#define COLOR_STR(string, color, background)   color background string "\x1b[0m"
+//#define COLOR_STR(color, background, string)   color background string "\x1b[0m"
+
