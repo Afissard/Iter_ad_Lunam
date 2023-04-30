@@ -1,8 +1,4 @@
-/* Resources : 
-    ANSI Escape for Color :
-    - https://stackoverflow.com/questions/3219393/stdlib-and-colored-output-in-c
-    - https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-*/
+
 
 // Reset
 #define RESET_ALL       "\x1b[0m"
@@ -43,5 +39,16 @@
 #define B_CYAN          "\x1b[96m"
 #define B_WHITE         "\x1b[97m"
 // Custom color print for easy use of Ansi escape code
-//#define COLOR_STR(color, background, string)   color background string "\x1b[0m"
+//#define COLOR_STR(color, background, string)   color background string "\x1b[0m" // old and decayed
 
+void color_str(char color[8], char background[8], char *str_target, int str_target_size){
+    /*
+    Fonction to add color and backround color to the string given (this one have to be bigger than 24)
+    */
+    if(str_target_size > 24){ // security
+        char *str_buff = malloc(str_target_size); // local temporary string
+        snprintf(str_buff, str_target_size, "%s%s%s\x1b[0m", color, background, str_target); // concatenation of all str
+        strcpy(str_target, str_buff);
+        free(str_buff); // prevent memory leak
+    }
+}

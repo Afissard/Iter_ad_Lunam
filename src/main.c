@@ -1,3 +1,11 @@
+/* Resources : 
+    ANSI Escape for Color :
+    - https://stackoverflow.com/questions/3219393/stdlib-and-colored-output-in-c
+    - https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+    Malloc stuff :
+    - https://stackoverflow.com/questions/14416759/return-char-string-from-a-function
+*/
+
 // Libraries
 #include <stdlib.h>
 #include <stdio.h>
@@ -12,24 +20,12 @@
 char screen[HEIGHT][WIDTH][STR_SIZE] = {};
 //char *p_screen = &screen;
 
-
-void color_str(char color[8], char background[8], char str_target[STR_SIZE]){
-    /*
-    Fonction to add color and backround color to the string given (this one have to be bigger than 24)
-    TODO: Add a way to get the size of the str_target for easier usage
-    */
-    // TODO : the solution is with malloc ? : https://stackoverflow.com/questions/14416759/return-char-string-from-a-function
-    char str_buff[STR_SIZE] = {}; // local temporary string
-    snprintf(str_buff, STR_SIZE, "%s%s%s\x1b[0m", color, background, str_target); // concatenation of all str
-    strcpy(str_target, str_buff);
-}
-
 void draw(char screen[HEIGHT][WIDTH][STR_SIZE], int x, int y, char ascii_char[1], char color[8], char background[8]){
     /* 
     Fonction to draw on the screen what have been given in parameter
     */
     char str_final[STR_SIZE] = {*ascii_char};
-    color_str(color, background, str_final);
+    color_str(color, background, str_final, sizeof(str_final));
     strcpy(screen[y][x], str_final);
 }
 
@@ -56,7 +52,7 @@ int main(){
 
     // END
     char test[64] = "Eamus ad Lunam!";
-    color_str(B_BLUE, BG_B_WHITE, test);
+    color_str(B_BLUE, BG_B_WHITE, test, sizeof(test));
     printf("%s\n", test);
     return 0;
 }
