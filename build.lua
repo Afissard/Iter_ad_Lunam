@@ -3,11 +3,10 @@
 ]]
 -- Setup
 local target_file = "src/main.c "
-local output_name = "iter"
+local output_name = "Iter"
 local all_lib = ""
 local lib_table = {
---     --"include/ncurses"
---     --"ncurses"
+    "include/bless_tui"
 }
 
 for i=1, #lib_table do -- on parcour la table avec la boucle
