@@ -4,6 +4,10 @@
     - https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
     Malloc stuff :
     - https://stackoverflow.com/questions/14416759/return-char-string-from-a-function
+    Structure stuff :
+    - https://stackoverflow.com/questions/228684/how-to-declare-a-structure-in-a-header-that-is-to-be-used-by-multiple-files-in-c
+    - https://stackoverflow.com/questions/2060974/how-to-include-a-dynamic-array-inside-a-struct-in-c
+
 */
 
 // Libraries
@@ -13,18 +17,13 @@
 // Other dependencies
 #include "bless_tui.c"
 
-// Variables & constantes
-#define WIDTH 128
-#define HEIGHT 32
-#define STR_SIZE 32 // Max size to encode the char + ANSI escape codes
-char screen[HEIGHT][WIDTH][STR_SIZE] = {};
-//char *p_screen = &screen;
+char screen[HEIGHT][WIDTH][STR_SIZE] = {}; // TODO need to move it to bless_tui (struct?) 
 
 
 int main(){
     init_screen(screen);
     
-    draw(screen, 0, 0, "@", B_RED, BG_B_WHITE);
+    draw(screen, 0, 0, "#", B_RED, BG_B_WHITE);
     display(screen);
 
     // END

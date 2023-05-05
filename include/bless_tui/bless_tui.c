@@ -1,4 +1,34 @@
+#include <stdlib.h>
 #include "bless_tui.h"
+
+typedef struct Screen{
+    /*
+    Struct for storing the width and height of the displayed screen in "charactere-unit"
+    and the actual char array containing the screen
+    */
+    int height;
+    int width;
+    char screen[][][]; // the last [] is a string (array of char)
+} Screen;
+
+void init_struct_Screen(){
+    int **array = malloc(sizeof(int *) * HEIGHT);
+    for(int y; y < HEIGHT; y++){
+        array[y] = malloc(sizeof(int *) * WIDTH);
+        for(int x; x < WHITE; x++){
+            array[y][x] = malloc(sizeof(char *) * STR_SIZE);
+        } 
+    }
+}
+void free_struct_Screen(int **array){
+    for(int y; y < HEIGHT; y++){
+        for(int x; x < WHITE; x++){
+            free (array[y][x]);
+        }    
+        free (array[y]);
+    }
+    free (array);
+}
 
 void color_str(char color[8], char background[8], char *str_target, int str_target_size){
     /*
@@ -25,7 +55,7 @@ void init_screen(char screen[HEIGHT][WIDTH][STR_SIZE]){
     // fill the full screen
     for(int y = 0; y < HEIGHT; y++){
         for(int x = 0; x < WIDTH; x++){
-            draw(screen, x, y, " ", B_WHITE, BG_BLACK);
+            draw(screen, x, y, " ", DEFAULT, DEFAULT);
         }
     } 
 }

@@ -1,5 +1,6 @@
 // Reset
 #define RESET_ALL       "\x1b[0m"
+#define DEFAULT        "" // Work for backround & charactere color
 // Background color
 #define BG_BLACK        "\x1b[40m"
 #define BG_RED          "\x1b[41m"
